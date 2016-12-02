@@ -119,7 +119,7 @@
 
 		ctx.fillStyle = 'rgb(30, 30, 30)';
 		ctx.globalAlpha = 1;
-		ctx.font = '180px Impact, sans-serif';
+		ctx.font = '180px Bungee, Impact, sans-serif';
 		ctx.textAlign = 'center';
 		ctx.textBaseline = 'middle';
 		ctx.fillText('BOLTERY', canvas.width / 2, canvas.height / 2);
