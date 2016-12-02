@@ -41,13 +41,7 @@
 	var mouseY = canvas.height / 2;
 	var toMouseY = canvas.height / 2;
 	var tweenMouse = false;
-	if (window.DeviceOrientationEvent) {
-		window.addEventListener("deviceorientation", function (e) {
-			mouseX = ((e.alpha + 90) / 180) * canvas.width;
-			mouseY = (Math.min(180, Math.max(0, e.beta)) / 180) * canvas.height;
-			console.log(mouseX, mouseY, e.alpha, e.beta);
-		}, true);
-	} else {
+	if (!window.DeviceOrientationEvent) {
 		tweenMouse = true;
 		document.body.addEventListener('mousemove', function (e) {
 			toMouseX = e.clientX;
