@@ -66,6 +66,7 @@
 	var bakeMs = bakeSeconds * 1000;
 	var textLayer = Math.floor(layers * 0.3);
 	var comingSoon = "comingsoon";
+	var tileMultiplier = tweenMouse ? 5 : 2;
 	for (var i = 0; i < layers; i++) {
 		layerBuf.push([]);
 	}
@@ -134,7 +135,7 @@
 				continue;
 			}
 
-			for (var j = 0; j < Math.random() * 5; j++) {
+			for (var j = 0; j < Math.random() * tileMultiplier; j++) {
 				var y = Math.random() * (canvas.height + 300) - 150;
 				layerBuf[i].push([canvas.width + edge, y, colors[Math.floor(Math.random() * colors.length)], 1 - (Math.pow(Math.random(), 2))]);
 			}
