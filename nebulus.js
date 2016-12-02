@@ -44,6 +44,7 @@
 		window.addEventListener("deviceorientation", function (e) {
 			mouseX = ((e.alpha + 90) / 180) * canvas.width;
 			mouseY = (Math.min(180, Math.max(0, e.beta)) / 180) * canvas.height;
+			console.log(mouseX, mouseY, e.alpha, e.beta);
 		}, true);
 	} else {
 		tweenMouse = true;
