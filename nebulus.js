@@ -45,7 +45,7 @@
 	}, {passive: true, capture: true});
 
 	var ctx = canvas.getContext('2d');
-	var speed = 300; // pixels per second for the 'deepest' layer
+	var speed = 150; // pixels per second for the 'deepest' layer
 	var layers = 30;
 	var threshold = 0.99;
 	var layerBuf = [];
@@ -106,6 +106,15 @@
 				}
 			}
 
+			if (i === (layers - 4)) {
+				ctx.fillStyle = 'rgb(30, 30, 30)';
+				ctx.globalAlpha = 1;
+				ctx.font = '180px Bungee, Impact, sans-serif';
+				ctx.textAlign = 'center';
+				ctx.textBaseline = 'middle';
+				ctx.fillText('BOLTERY', canvas.width / 2, canvas.height / 2);
+			}
+
 			var spawn = Math.random();
 			if (spawn < (threshold - Math.pow((layers - i) / layers, 15) * 1)) {
 				continue;
@@ -116,13 +125,6 @@
 				layerBuf[i].push([canvas.width + edge, y, colors[Math.floor(Math.random() * colors.length)], 1 - (Math.pow(Math.random(), 2))]);
 			}
 		}
-
-		ctx.fillStyle = 'rgb(30, 30, 30)';
-		ctx.globalAlpha = 1;
-		ctx.font = '180px Bungee, Impact, sans-serif';
-		ctx.textAlign = 'center';
-		ctx.textBaseline = 'middle';
-		ctx.fillText('BOLTERY', canvas.width / 2, canvas.height / 2);
 
 		if (!baking) {
 			window.requestAnimationFrame(cb);
