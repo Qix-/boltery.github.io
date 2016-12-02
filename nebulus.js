@@ -39,12 +39,14 @@
 	var toMouseX = canvas.width / 2;
 	var mouseY = canvas.height / 2;
 	var toMouseY = canvas.height / 2;
+	var tweenMouse = false;
 	if (window.DeviceOrientationEvent) {
 		window.addEventListener("deviceorientation", function (e) {
 			mouseX = ((e.alpha + 90) / 180) * canvas.width;
 			mouseY = (Math.min(180, Math.max(0, e.beta)) / 180) * canvas.height;
 		}, true);
 	} else {
+		tweenMouse = true;
 		document.body.addEventListener('mousemove', function (e) {
 			toMouseX = e.clientX;
 			toMouseY = e.clientY;
@@ -80,8 +82,10 @@
 		var deltaFrac = delta / 1000;
 		lastTime = time;
 
-		mouseX += (toMouseX - mouseX) * mouseRate;
-		mouseY += (toMouseY - mouseY) * mouseRate;
+		if (tweenMouse) {
+			mouseX += (toMouseX - mouseX) * mouseRate;
+			mouseY += (toMouseY - mouseY) * mouseRate;
+		}
 
 		for (var i = 0; i < layers; i++) {
 			var shift = (((i * speed) / 10) + speed) * deltaFrac;
