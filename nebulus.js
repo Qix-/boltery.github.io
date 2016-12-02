@@ -39,10 +39,17 @@
 	var toMouseX = canvas.width / 2;
 	var mouseY = canvas.height / 2;
 	var toMouseY = canvas.height / 2;
-	document.body.addEventListener('mousemove', function (e) {
-		toMouseX = e.clientX;
-		toMouseY = e.clientY;
-	}, {passive: true, capture: true});
+	if (window.DeviceOrientationEvent) {
+		window.addEventListener("deviceorientation", function (e) {
+			mouseX = ((e.alpha + 90) / 180) * canvas.width;
+			mouseY = (Math.min(180, Math.max(0, e.beta)) / 180) * canvas.height;
+		}, true);
+	} else {
+		document.body.addEventListener('mousemove', function (e) {
+			toMouseX = e.clientX;
+			toMouseY = e.clientY;
+		}, {passive: true, capture: true});
+	}
 
 	var ctx = canvas.getContext('2d');
 	var speed = 150; // pixels per second for the 'deepest' layer
