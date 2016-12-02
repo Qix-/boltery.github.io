@@ -24,11 +24,12 @@
 		colors.push('#bbbbbb');
 	}
 
+	var backCanvas = document.createElement('canvas');
 	var canvas = document.querySelector('#bg');
 	var updateBounds = function () {
 		var bounds = document.body.getBoundingClientRect();
-		canvas.width = bounds.width;
-		canvas.height = bounds.height;
+		backCanvas.width = canvas.width = bounds.width;
+		backCanvas.height = canvas.height = bounds.height;
 	};
 
 	updateBounds();
@@ -54,7 +55,8 @@
 		}, {passive: true, capture: true});
 	}
 
-	var ctx = canvas.getContext('2d');
+	var bctx = canvas.getContext('2d');
+	var ctx = backCanvas.getContext('2d');
 	var speed = 150; // pixels per second for the 'deepest' layer
 	var layers = 30;
 	var threshold = 0.99;
@@ -138,7 +140,11 @@
 			}
 		}
 
+		// swap buffer
 		if (!baking) {
+			bctx.clearRect(0, 0, canvas.width, canvas.height);
+			bctx.drawImage(backCanvas, 0, 0);
+
 			window.requestAnimationFrame(cb);
 		}
 	};
